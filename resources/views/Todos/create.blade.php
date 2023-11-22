@@ -17,6 +17,7 @@
                                 </ul>
                             </div>
                         @endif
+                        <a href="{{ url()->previous() }}" class="btn btn-success">Go Back</a><br>
                         <form method="POST" action="{{ route('todos.store') }}">
                             @csrf
                             <div class="m-3">
