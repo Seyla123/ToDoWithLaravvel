@@ -13,6 +13,12 @@
                                 {{ Session::get('alert-success') }}
                             </div>
                         @endif
+                        @if (Session::has('alert-info'))
+                            <div class="alert alert-info" role="alert">
+                                {{ Session::get('alert-info') }}
+                            </div>
+                        @endif
+                        <a class="btn btn-info" href="/Todos/create">Create Todo List</a>
                         <table class="table">
                             <caption>List of what I have to do. ( DO IT NOW!!! )</caption>
                             @if (count($todos) > 0)
@@ -35,16 +41,20 @@
                                             <td>{{ $todo->Description }}</td>
                                             <td style="text-align: center;">
                                                 @if ($todo->Is_Completed == 1)
-                                                    <a class="btn btn-success">completed</a>
+                                                    <a class="btn btn-success" href="{{route('todos.completed', $todo->id)}}" >completed</a>
+                                                @else
+                                                <a class="btn btn-danger" href="{{route('todos.completed', $todo->id)}}">Incomplete</a>
                                                 @endif
-                                                <a class="btn btn-danger">Incomplete</a>
+
                                             </td>
                                             <td>
                                                 <div style="text-align: center;">
 
                                                     <a class="btn btn-info" style="display:inline-block;" href="{{ route('todos.show', $todo->id) }}">View</a>
-                                                    <a class="btn btn-primary" style="display:inline-block;">Edit</a>
-                                                    <form action="" style="display:inline-block;">
+                                                    <a class="btn btn-primary" style="display:inline-block;" href="{{ route('todos.edit', $todo->id)}}">Edit</a>
+                                                    <form method="POST" action="{{route('todos.destroy')}}" style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
                                                         <input type="hidden" name="todo_id" value="{{ $todo->id }}">
                                                         <input class="btn btn-danger" type="submit" value="Delete">
                                                     </form>
