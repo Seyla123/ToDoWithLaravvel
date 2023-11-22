@@ -28,6 +28,7 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Description</th>
                                         <th scope="col" style="text-align: center;">Completed</th>
+                                        <th scope="col" style="text-align: center;">Create By</th>
                                         <th scope="col" style="text-align: center;">Action</th>
 
                                     </tr>
@@ -47,6 +48,7 @@
                                                 @endif
 
                                             </td>
+                                            <td>{{$todo->user->name}}</td>
                                             <td>
                                                 <div style="text-align: center;">
 

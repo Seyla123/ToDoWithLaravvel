@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 class TodoController extends Controller
 {
     public function Index(){
-        $todos = Todo::where('Is_Deleted',0)->get();
-        Return View('Todos.index',[
-            'todos' => $todos
+
+        $todos = Todo::with('user')->get();
+        //return $todos;
+        Return View('Todos.index',['todos' => $todos 
         ]);
     }
     public function TodosIndex(){
@@ -26,7 +27,8 @@ class TodoController extends Controller
         'title' => $request-> title,
         'description' => $request->description,
         'Is_Completed' => 0,
-        'Is_Deleted' => 0
+        'Is_Deleted' => 0,
+        'user_id'=>1,
        ]);
 
        $request ->session()->flash('alert-success', 'Todo Created Successfully');

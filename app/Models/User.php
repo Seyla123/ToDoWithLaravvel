@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    //The user_id column in the todos table is a foreign key referencing the id column in the users table
+    public function todo(){
+
+        return $this->hasMany(Todo::class,'user_id');
+    }
     /**
      * The attributes that are mass assignable.
      *

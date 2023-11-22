@@ -23,7 +23,7 @@ Route::get('/Todos', [TodoController::class, 'TodosIndex']);
 Auth::routes();
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\TodoController::class, 'index'])->name('home');
 
 Route::get('Todos/index',[TodoController::class, 'index'])->name('Todos.index');
 Route::get('Todos/create',[TodoController::class, 'create'])->name('Todos.create');
