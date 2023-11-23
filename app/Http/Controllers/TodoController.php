@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class TodoController extends Controller
 {
@@ -12,7 +15,7 @@ class TodoController extends Controller
 
         $todos = Todo::with('user')->get();
         //return $todos;
-        Return View('Todos.index',['todos' => $todos 
+        Return View('Todos.index',['todos' => $todos
         ]);
     }
     public function TodosIndex(){
@@ -23,12 +26,13 @@ class TodoController extends Controller
     }
     public function store(TodoRequest $request){
        // return $request->all();
+       //return $request;
        Todo::create([
         'title' => $request-> title,
         'description' => $request->description,
         'Is_Completed' => 0,
         'Is_Deleted' => 0,
-        'user_id'=>1,
+        'user_id'=>Auth::user()->id,
        ]);
 
        $request ->session()->flash('alert-success', 'Todo Created Successfully');
